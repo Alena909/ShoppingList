@@ -1,0 +1,73 @@
+ <List
+      sx={{
+        width: "60%",
+        maxWidth: 360,
+        bgcolor: "background.paper",
+        margin: "0 auto",
+        color: "primary.main",
+        lineHeight: "1rem",
+      }}
+    >
+      {isEditing ? (
+        <EditItem
+          editItem={editItem}
+          id={id}
+          key={id}
+          item={item}
+          toggleItem={toggle}
+        />
+      ) : (
+        <ListItem
+          key={id}
+          secondaryAction={
+            <>
+              <IconButton
+                edge="end"
+                aria-label="edit"
+                style={{
+                  color: completed ? "red" : " #1976d2",
+                  marginRight: "1.5rem",
+                }}
+                onClick={() => editItem(id)}
+              >
+                <EditIcon />
+              </IconButton>
+              <IconButton
+                edge="end"
+                aria-label="delete"
+                style={{ color: completed ? "red" : " #1976d2" }}
+                onClick={() => deleteItem(id)}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </>
+          }
+          disablePadding
+        >
+          <ListItemButton
+            role={undefined}
+            //   onClick={handleToggle(value)}
+            dense
+          >
+            <ListItemIcon>
+              <Checkbox
+                edge="start"
+                checked={completed}
+                tabIndex={-1}
+                disableRipple
+                inputProps={{ "aria-labelledby": id }}
+                style={{ color: completed ? "red" : " #1976d2" }}
+              />
+            </ListItemIcon>
+            <ListItemText
+              id={id}
+              primary={item}
+              style={{
+                textDecoration: completed ? "line-through" : "none",
+                color: completed ? "red" : "none",
+              }}
+            />
+          </ListItemButton>
+        </ListItem>
+      )}
+    </List>
